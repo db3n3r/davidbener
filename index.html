@@ -8,7 +8,8 @@
     <title>David Bener | Infraestrutura</title>
     <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  
+
+
     <style>
         /* Estilo do fundo de partículas */
         #particles-js {
@@ -224,6 +225,7 @@
             color: #f1c40f;
         }
     </style>
+
 </head>
 
 <body>
@@ -239,7 +241,10 @@
                 <a href="https://github.com/db3n3r" target="_blank"><i class="fab fa-github"></i></a>
                 <a href="https://linkedin.com/in/davidbener" target="_blank"><i class="fab fa-linkedin"></i></a>
                 <a href="mailto:contato@davidbener.com"><i class="fas fa-envelope"></i></a>
-                <a href="https://davidbener.com/matrix-efect.html"><i class="fa-regular fa-star-half-stroke"></i></a>
+
+                <!-- Aqui está o botão modificado que carrega a matrix-efect.html -->
+                <a href="#" onclick="carregarMatrixCompleta()"><i class="fa-regular fa-star-half-stroke"></i></a>
+
                 <button class="cert-button" onclick="toggleCertModal()"><i class="fas fa-list"></i></button>
             </div>
 
@@ -269,64 +274,57 @@
         <button onclick="toggleCertModal()">Fechar</button>
     </div>
 
-    <!-- Overlay do Modal -->
     <div id="modalOverlay" class="modal-overlay"></div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
-particlesJS("particles-js", {
-    particles: {
-        number: { value: 60, density: { enable: true, value_area: 800 } },
-        color: { value: "#00bcd4" },
-        shape: { type: "circle" },
-        opacity: { value: 0.5 },
-        size: { value: 4 },
-        line_linked: {
-            enable: true,
-            distance: 150,
-            color: "#00bcd4",
-            opacity: 0.4,
-            width: 1
-        },
-        move: {
-            enable: true,
-            speed: 2,
-            direction: "none",
-            out_mode: "out"
-        }
-    },
-    interactivity: {
-        detect_on: "window", // <-- Alterado para detectar eventos em toda a janela
-        events: {
-            onhover: {
-                enable: true,
-                mode: "grab"
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 60, density: { enable: true, value_area: 800 } },
+                color: { value: "#00bcd4" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5 },
+                size: { value: 4 },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#00bcd4",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    out_mode: "out"
+                }
             },
-            onclick: {
-                enable: true,
-                mode: "push"
+            interactivity: {
+                detect_on: "window",
+                events: {
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true
+                },
+                modes: {
+                    grab: { distance: 180, line_linked: { opacity: 0.6 } },
+                    push: { particles_nb: 4 }
+                }
             },
-            resize: true
-        },
-        modes: {
-            grab: {
-                distance: 180,
-                line_linked: { opacity: 0.6 }
-            },
-            push: { particles_nb: 4 }
-        }
-    },
-    retina_detect: true
-});
+            retina_detect: true
+        });
 
-    </script>
-    <script>
         function toggleCertModal() {
             var modal = document.getElementById('certModal');
             var overlay = document.getElementById('modalOverlay');
             modal.classList.toggle('show');
             overlay.classList.toggle('show');
+        }
+
+        function toggleChatForm() {
+            var chatForm = document.getElementById('chatForm');
+            chatForm.style.display = chatForm.style.display === "none" || chatForm.style.display === "" ? "block" : "none";
         }
 
         document.getElementById('myForm').addEventListener('submit', function(event) {
@@ -353,9 +351,39 @@ particlesJS("particles-js", {
             });
         });
 
-        function toggleChatForm() {
-            var chatForm = document.getElementById('chatForm');
-            chatForm.style.display = chatForm.style.display === "none" || chatForm.style.display === "" ? "block" : "none";
+        // 🔁 Função que carrega a matrix-efect.html e substitui a página inteira
+        function carregarMatrixCompleta() {
+            fetch('matrix-efect.html')
+                .then(response => {
+                    if (!response.ok) throw new Error('Erro ao carregar a página');
+                    return response.text();
+                })
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+
+                    // Substitui <head>
+                    document.head.innerHTML = doc.head.innerHTML;
+
+                    // Substitui <body>
+                    document.body.innerHTML = doc.body.innerHTML;
+
+                    // Reexecuta todos os scripts da nova página
+                    const scripts = doc.querySelectorAll("script");
+                    scripts.forEach(script => {
+                        const newScript = document.createElement("script");
+                        if (script.src) {
+                            newScript.src = script.src;
+                        } else {
+                            newScript.textContent = script.textContent;
+                        }
+                        document.body.appendChild(newScript);
+                    });
+                })
+                .catch(err => {
+                    console.error('Erro ao carregar a página Matrix:', err);
+                    alert('Não foi possível carregar a página.');
+                });
         }
     </script>
 </body>
