@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>David Bener | Infraestrutura de TI</title>
+    <meta name="description" content="David Bener - Analista de Infraestrutura de TI especializado em Cloud, DevOps, AWS, Oracle Cloud e automação. Veja meu portfólio e certificações.">
+    <meta name="keywords" content="David Bener, Infraestrutura TI, AWS, Oracle Cloud, DevOps, Terraform, Docker, Python">
+    <meta property="og:title" content="David Bener | Infraestrutura de TI">
+    <meta property="og:description" content="Analista de Infraestrutura de TI especializado em Cloud, DevOps e automação">
+    <meta property="og:image" content="./user.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -40,15 +48,42 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.85);
             border-radius: 20px;
             box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease;
+            max-width: 420px;
+            margin: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .container:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .container {
+                max-width: 95vw;
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .profile-card img {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .profile-card h2 {
+                font-size: 1.6rem;
+            }
+            
+            .profile-card .icons a, .cert-button {
+                font-size: 1.4rem;
+                margin: 0 10px;
+            }
         }
 
         .profile-card img {
@@ -57,10 +92,13 @@
             border-radius: 50%;
             margin-bottom: 20px;
             transition: transform 0.3s ease-in-out;
+            border: 3px solid #f1c40f;
+            box-shadow: 0 0 20px rgba(241, 196, 15, 0.3);
         }
 
         .profile-card img:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(241, 196, 15, 0.5);
         }
 
         .profile-card h2 {
@@ -93,55 +131,157 @@
 
         .profile-card .chat-button {
             margin-top: 20px;
-            padding: 10px 30px;
-            background: #f1c40f;
+            padding: 12px 35px;
+            background: linear-gradient(45deg, #f1c40f, #f39c12);
             border: none;
             border-radius: 25px;
             cursor: pointer;
             font-size: 1rem;
-            transition: background-color 0.3s ease;
+            font-weight: 500;
+            color: #000;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(241, 196, 15, 0.3);
         }
 
         .chat-button:hover {
-            background: #e1b20e;
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(241, 196, 15, 0.4);
+        }
+
+        /* Seção Sobre Mim */
+        .about-section {
+            margin: 25px 0 15px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border-left: 4px solid #f1c40f;
+        }
+
+        .about-section h3 {
+            color: #f1c40f;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .about-section p {
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            text-align: left;
+            margin: 0;
+        }
+
+        /* Skills Section */
+        .skills-section {
+            margin: 20px 0;
+            width: 100%;
+        }
+
+        .skills-section h3 {
+            color: #f1c40f;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .skill-item {
+            background: rgba(241, 196, 15, 0.1);
+            border: 1px solid rgba(241, 196, 15, 0.3);
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 0.9rem;
+            color: #f1c40f;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .skill-item:hover {
+            background: rgba(241, 196, 15, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(241, 196, 15, 0.2);
         }
 
         .chat-form {
             display: none;
             margin-top: 30px;
-            padding: 20px;
-            background: #333;
-            border-radius: 10px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
             box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .chat-form h3 {
+            color: #f1c40f;
+            margin-bottom: 20px;
         }
 
         .chat-form input, .chat-form textarea {
-            width: 100%;
-            padding: 7px;
+            width: calc(100% - 16px);
+            padding: 12px;
             margin: 8px 0;
-            border-radius: 2px;
-            border: 1px solid #555;
-            background: #222;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
             color: #fff;
-            transition: border 0.3s ease;
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
 
         .chat-form input:focus, .chat-form textarea:focus {
             border-color: #f1c40f;
+            background: rgba(255, 255, 255, 0.15);
+            outline: none;
+            box-shadow: 0 0 10px rgba(241, 196, 15, 0.2);
         }
 
         .chat-form button {
-            padding: 10px 20px;
+            padding: 12px 25px;
             border: none;
-            background: #f1c40f;
+            background: linear-gradient(45deg, #f1c40f, #f39c12);
             color: #000;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: 10px;
         }
 
         .chat-form button:hover {
-            background: #e1b20e;
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            transform: translateY(-2px);
+        }
+
+        /* Feedback Messages */
+        .feedback-message {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .feedback-success {
+            background: rgba(39, 174, 96, 0.8);
+            color: #fff;
+            border: 1px solid #27ae60;
+        }
+
+        .feedback-error {
+            background: rgba(192, 57, 43, 0.8);
+            color: #fff;
+            border: 1px solid #c0392b;
         }
 
         /* Estilos para o modal de certificações */
@@ -151,47 +291,72 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.7);
             z-index: 1000;
-            width: 80%;
+            width: 85%;
             max-width: 500px;
             text-align: left;
             color: #fff;
+            border: 1px solid rgba(241, 196, 15, 0.3);
+            backdrop-filter: blur(10px);
         }
 
         .modal.show {
             display: block;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
         }
 
         .modal h3 {
             font-size: 1.5rem;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             color: #f1c40f;
             text-align: center;
+            border-bottom: 2px solid #f1c40f;
+            padding-bottom: 10px;
         }
 
         .modal p {
             font-size: 1rem;
-            margin: 10px 0;
+            margin: 12px 0;
+            padding-left: 10px;
+            border-left: 2px solid rgba(241, 196, 15, 0.3);
+        }
+
+        .modal p a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .modal p a:hover {
+            color: #f1c40f;
         }
 
         .modal button {
             display: block;
-            margin: 20px auto 0;
-            padding: 10px 20px;
-            background: #f1c40f;
+            margin: 30px auto 0;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #f1c40f, #f39c12);
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 1rem;
-            transition: background-color 0.3s ease;
+            color: #000;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
 
         .modal button:hover {
-            background: #e1b20e;
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            transform: translateY(-2px);
         }
 
         /* Fundo escurecido quando o modal está aberto */
@@ -234,44 +399,67 @@
 
     <div class="container">
         <div class="profile-card">
-            <img src="./user.jpg" alt="Profile Picture">
+            <img src="./user.jpg" alt="David Bener - Profile Picture">
             <h2>David Bener</h2>
             <p>Analista de Infraestrutura de TI</p>
-            <div class="icons">
-                <a href="https://github.com/db3n3r" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://linkedin.com/in/davidbener" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:contato@davidbener.com"><i class="fas fa-envelope"></i></a>
-
-                <!-- Aqui está o botão modificado que carrega a matrix-efect.html -->
-                <!-- <a href="#" onclick="carregarMatrixCompleta()"><i class="fa-regular fa-star-half-stroke"></i></a>-->
-                <a href="#" onclick="event.preventDefault(); carregarMatrixCompleta();"><i class="fa-regular fa-star-half-stroke"></i></a>
-                <button class="cert-button" onclick="toggleCertModal()"><i class="fas fa-list"></i></button>
+            
+            <!-- Seção Sobre Mim -->
+            <div class="about-section">
+                <h3><i class="fas fa-user"></i> Sobre Mim</h3>
+                <p>Profissional especializado em infraestrutura de TI com foco em soluções cloud, automação e DevOps. Experiência sólida em AWS, Oracle Cloud, containerização e segurança de redes, sempre buscando otimizar processos e entregar soluções robustas.</p>
             </div>
 
-            <button class="chat-button" onclick="toggleChatForm()">Me envie uma mensagem</button>
+            <!-- Skills Section -->
+            <div class="skills-section">
+                <h3><i class="fas fa-cog"></i> Principais Skills</h3>
+                <div class="skills-grid">
+                    <div class="skill-item">AWS</div>
+                    <div class="skill-item">Oracle Cloud</div>
+                    <div class="skill-item">Linux</div>
+                    <div class="skill-item">Docker</div>
+                    <div class="skill-item">Terraform</div>
+                    <div class="skill-item">Python</div>
+                    <div class="skill-item">DevOps</div>
+                    <div class="skill-item">Firewall</div>
+                    <div class="skill-item">Automação</div>
+                </div>
+            </div>
+            
+            <div class="icons">
+                <a href="https://github.com/db3n3r" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/davidbener" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:contato@davidbener.com" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="#" onclick="event.preventDefault(); carregarMatrixCompleta();" title="Matrix Effect"><i class="fa-regular fa-star-half-stroke"></i></a>
+                <button class="cert-button" onclick="toggleCertModal()" title="Certificações"><i class="fas fa-certificate"></i></button>
+            </div>
+
+            <button class="chat-button" onclick="toggleChatForm()">
+                <i class="fas fa-paper-plane"></i> Me envie uma mensagem
+            </button>
 
             <div id="chatForm" class="chat-form">
-                <h3>Digite sua mensagem</h3>
+                <h3><i class="fas fa-comments"></i> Digite sua mensagem</h3>
                 <form id="myForm">
                     <input type="email" name="email" placeholder="Seu Email" required>
-                    <textarea name="message" placeholder="Sua Mensagem" required></textarea>
-                    <button type="submit">Enviar</button>
+                    <textarea name="message" placeholder="Sua Mensagem" rows="4" required></textarea>
+                    <button type="submit"><i class="fas fa-send"></i> Enviar</button>
                 </form>
+                <div id="feedbackMsg" class="feedback-message"></div>
             </div>
         </div>
     </div>
 
     <!-- Modal de Certificações -->
     <div id="certModal" class="modal">
-        <h3>Minhas Certificações</h3>
-        <p>• <a href="https://www.credly.com/badges/1b7fb988-f37b-4d8d-9190-c1d8e4368813/linked_in_profile" target="_blank">AWS Certified Cloud Practitioner - PearsonVUE</a></p>
-        <p>• <a href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=E4B7241F5C7E43335F084CFABCA71EE731713AE3785457668C44641D0A1F2414" target="_blank">OCI 2023 Certified - Oracle</a></p>
-        <p>• <a href="https://cursos.alura.com.br/certificate/7ee07f03-535e-4f35-9a3e-b5e1aa819baa?lang" target="_blank">IaC: Terraform e Kubernetes - Alura</a></p>
-        <p>• <a href="https://cursos.alura.com.br/certificate/7ee07f03-535e-4f35-9a3e-b5e1aa819baa?lang" target="_blank">Docker: criando e gerenciando containers - Alura</a></p>
-        <p>• <a href="https://cursos.alura.com.br/certificate/572995f6-bd5d-4e04-8450-efd79869c947" target="_blank">Python: avançando na linguagem - Alura</a></p>
-        <p>• <a href="https://www.udemy.com/certificate/UC-52f3f80a-1045-4194-b20c-95e45bf694c8/" target="_blank">PBX Básico - CentOS e Asterisk do zero - Udemy</a></p>
-        <p>• <a href="https://cursos.alura.com.br/certificate/f6b53062-ded4-400d-abc1-7d6e9327511d/" target="_blank">Segurança de redes: PFsense e Iptables - Alura</a></p>
-        <button onclick="toggleCertModal()">Fechar</button>
+        <h3><i class="fas fa-award"></i> Minhas Certificações</h3>
+        <p>• <a href="https://www.credly.com/badges/1b7fb988-f37b-4d8d-9190-c1d8e4368813/linked_in_profile" target="_blank"><i class="fab fa-aws"></i> AWS Certified Cloud Practitioner - PearsonVUE</a></p>
+        <p>• <a href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=E4B7241F5C7E43335F084CFABCA71EE731713AE3785457668C44641D0A1F2414" target="_blank"><i class="fas fa-cloud"></i> OCI 2023 Certified - Oracle</a></p>
+        <p>• <a href="https://cursos.alura.com.br/certificate/7ee07f03-535e-4f35-9a3e-b5e1aa819baa?lang" target="_blank"><i class="fas fa-server"></i> IaC: Terraform e Kubernetes - Alura</a></p>
+        <p>• <a href="https://cursos.alura.com.br/certificate/7ee07f03-535e-4f35-9a3e-b5e1aa819baa?lang" target="_blank"><i class="fab fa-docker"></i> Docker: criando e gerenciando containers - Alura</a></p>
+        <p>• <a href="https://cursos.alura.com.br/certificate/572995f6-bd5d-4e04-8450-efd79869c947" target="_blank"><i class="fab fa-python"></i> Python: avançando na linguagem - Alura</a></p>
+        <p>• <a href="https://www.udemy.com/certificate/UC-52f3f80a-1045-4194-b20c-95e45bf694c8/" target="_blank"><i class="fas fa-phone"></i> PBX Básico - CentOS e Asterisk do zero - Udemy</a></p>
+        <p>• <a href="https://cursos.alura.com.br/certificate/f6b53062-ded4-400d-abc1-7d6e9327511d/" target="_blank"><i class="fas fa-shield-alt"></i> Segurança de redes: PFsense e Iptables - Alura</a></p>
+        <button onclick="toggleCertModal()"><i class="fas fa-times"></i> Fechar</button>
     </div>
 
     <div id="modalOverlay" class="modal-overlay"></div>
@@ -330,6 +518,13 @@
         document.getElementById('myForm').addEventListener('submit', function(event) {
             event.preventDefault();
             var formData = new FormData(this);
+            var feedback = document.getElementById('feedbackMsg');
+            var submitBtn = this.querySelector('button[type="submit"]');
+            
+            // Feedback visual durante envio
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            submitBtn.disabled = true;
+            feedback.style.display = 'none';
 
             fetch('send_mail.php', {
                 method: 'POST',
@@ -338,16 +533,29 @@
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
-                    alert("Mensagem enviada com sucesso!");
+                    feedback.textContent = "✅ Mensagem enviada com sucesso!";
+                    feedback.className = 'feedback-message feedback-success';
+                    feedback.style.display = 'block';
                     document.getElementById('myForm').reset();
-                    toggleChatForm();
+                    setTimeout(() => { 
+                        toggleChatForm(); 
+                        feedback.style.display = 'none'; 
+                    }, 2000);
                 } else {
-                    alert(data.message);
+                    feedback.textContent = "❌ " + (data.message || 'Erro ao enviar mensagem.');
+                    feedback.className = 'feedback-message feedback-error';
+                    feedback.style.display = 'block';
                 }
             })
             .catch((error) => {
-                alert('Oops... algo deu errado!');
+                feedback.textContent = '❌ Oops... algo deu errado! Tente novamente.';
+                feedback.className = 'feedback-message feedback-error';
+                feedback.style.display = 'block';
                 console.error('Error:', error);
+            })
+            .finally(() => {
+                submitBtn.innerHTML = '<i class="fas fa-send"></i> Enviar';
+                submitBtn.disabled = false;
             });
         });
 
