@@ -673,7 +673,12 @@
             <div id="chatForm" class="chat-form">
                 <h3><i class="fas fa-comments"></i> Envie sua mensagem</h3>
                 <form id="myForm">
+                    <input type="hidden" name="access_key" value="6dd0bbdb-8855-46f9-9921-1a1f57ec2cbf">
+                    <input type="hidden" name="subject" value="Nova mensagem do site davidbener.com">
+                    <input type="hidden" name="from_name" value="Portfólio David Bener">
+                    <input type="checkbox" name="botcheck" style="display:none">
                     <input type="email" name="email" placeholder="Seu email" required autocomplete="email">
+                    <input type="text" name="name" placeholder="Seu nome" required autocomplete="name" maxlength="100">
                     <textarea name="message" placeholder="Sua mensagem..." rows="4" required></textarea>
                     <button type="submit"><i class="fas fa-paper-plane"></i> Enviar mensagem</button>
                 </form>
@@ -823,13 +828,13 @@
             submitBtn.disabled = true;
             feedback.style.display = 'none';
 
-            fetch('send_mail.php', {
+            fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
                 body: formData,
             })
             .then(response => response.json())
             .then(data => {
-                if (data.status === 'success') {
+                if (data.success) {
                     feedback.textContent = "Mensagem enviada com sucesso!";
                     feedback.className = 'feedback-message feedback-success';
                     feedback.style.display = 'block';
