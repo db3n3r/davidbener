@@ -1,0 +1,7 @@
+:: lista todos os processos de um path especifico, no caso do exemplo o C:\ProgramData\Microsoft\Windows\
+
+Get-CimInstance Win32_Process | Where-Object ExecutablePath -like 'C:\ProgramData\Microsoft\Windows\*' | Select-Object ProcessId, Name, ExecutablePath
+
+:: finaliza todos os processos de um path especifico  no caso do exemplo o C:\ProgramData\Microsoft\Windows\
+
+1..4 | ForEach-Object { Get-CimInstance -ClassName Win32_Process -Filter "ExecutablePath LIKE 'C:\\ProgramData\\Microsoft\\Windows\\%'" | Invoke-CimMethod -MethodName Terminate; Start-Sleep -Seconds 1 }
