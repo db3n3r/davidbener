@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title></title>
+<style>
+  :root {
+    --bg: #0f1117; --bg2: #161b22; --bg3: #1c2128; --bg4: #21262d; --bg5: #0d1117;
+    --border: #30363d; --border2: #21262d;
+    --text: #e1e4e8; --text2: #8b949e; --text3: #484f58; --text-link: #58a6ff;
+    --accent: #1f6feb; --accent-hover: #388bfd;
+    --green: #238636; --green-hover: #2ea043;
+    --status-on-bg: #23882633; --status-on: #3fb950;
+    --status-off-bg: #f8514933; --status-off: #f85149;
+    --badge-bg: #30363d;
+  }
+  body.light {
+    --bg: #f6f8fa; --bg2: #ffffff; --bg3: #f0f2f5; --bg4: #e1e4e8; --bg5: #ffffff;
+    --border: #d0d7de; --border2: #d8dee4;
+    --text: #1f2328; --text2: #656d76; --text3: #8b949e; --text-link: #0969da;
+    --accent: #0969da; --accent-hover: #0550ae;
+    --green: #1a7f37; --green-hover: #218843;
+    --status-on-bg: #dafbe1; --status-on: #1a7f37;
+    --status-off-bg: #ffebe9; --status-off: #cf222e;
+    --badge-bg: #e1e4e8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  .navbar { background: var(--bg2); padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
+  .navbar h1 { font-size: 20px; color: var(--text-link); }
+  .navbar a, .navbar button.linkish { color: var(--text2); text-decoration: none; font-size: 14px; background: none; border: none; cursor: pointer; }
+  .navbar a:hover, .navbar button.linkish:hover { color: var(--text-link); }
+  .navbar .nav-right { display: flex; align-items: center; gap: 16px; }
+  .theme-toggle { background: none; border: none; cursor: pointer; font-size: 18px; padding: 4px 8px; border-radius: 4px; }
+  .container { max-width: 100%; margin: 40px auto; padding: 0 24px; }
+  .login-box { max-width: 400px; margin: 90px auto; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 40px; }
+  .login-box h2 { text-align: center; margin-bottom: 24px; color: var(--text-link); }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; margin-bottom: 6px; font-size: 14px; color: var(--text2); }
+  .form-group input { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg5); color: var(--text); font-size: 14px; }
+  .form-group input:focus { outline: none; border-color: var(--text-link); }
+  .btn { display: inline-block; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 600; text-decoration: none; text-align: center; }
+  .btn-primary { background: var(--green); color: #fff; width: 100%; }
+  .btn-primary:hover { background: var(--green-hover); }
+  .btn-view { background: var(--accent); color: #fff; padding: 6px 16px; font-size: 13px; }
+  .btn-view:hover { background: var(--accent-hover); }
+  .error { color: var(--status-off); text-align: center; margin-bottom: 16px; font-size: 14px; min-height: 18px; }
+  .muted { color: var(--text2); font-size: 12px; text-align: center; margin-top: 16px; word-break: break-all; }
+  table { width: 100%; border-collapse: collapse; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  th { background: var(--bg3); padding: 12px 16px; text-align: left; font-size: 13px; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; }
+  td { padding: 12px 16px; border-top: 1px solid var(--border2); font-size: 14px; }
+  .status { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+  .status-online { background: var(--status-on-bg); color: var(--status-on); }
+  .status-offline { background: var(--status-off-bg); color: var(--status-off); }
+  .empty { text-align: center; padding: 60px; color: var(--text3); }
+  .search-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+  .search-bar input { padding: 10px 14px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg5); color: var(--text); font-size: 14px; width: 320px; max-width: 100%; }
+  .search-bar input:focus { outline: none; border-color: var(--text-link); }
+  .badge-count { background: var(--badge-bg); color: var(--text2); padding: 2px 8px; border-radius: 10px; font-size: 12px; margin-left: 8px; }
+  .viewer-container { text-align: center; }
+  .viewer-container canvas { display: inline-block; transform-origin: 0 0; border: 1px solid var(--border); border-radius: 8px; background: #000; }
+  .fullscreen-area { position: relative; }
+  .fullscreen-area:fullscreen { background: var(--bg); display: flex; flex-direction: column; align-items: center; }
+  .fullscreen-area:fullscreen .toolbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--bg2); padding: 8px 16px; margin-bottom: 0; justify-content: center; border-bottom: 1px solid var(--border); opacity: 0.15; transition: opacity 0.2s; }
+  .fullscreen-area:fullscreen .toolbar:hover { opacity: 1; }
+  .fullscreen-area:fullscreen canvas { margin-top: 56px; border-radius: 0; border: none; }
+  .viewer-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
+  .viewer-status { font-size: 13px; padding: 4px 12px; border-radius: 12px; }
+  .toolbar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .toolbar-group { display: flex; align-items: center; gap: 4px; background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 4px; }
+  .toolbar-group label { font-size: 12px; color: var(--text2); padding: 0 8px; }
+  .btn-tool { background: var(--bg4); color: var(--text); border: 1px solid var(--border); border-radius: 4px; padding: 6px 12px; cursor: pointer; font-size: 13px; font-weight: 500; }
+  .btn-tool:hover { background: var(--border); }
+  .btn-tool.active { background: var(--accent); color: #fff; border-color: var(--accent-hover); }
+  .zoom-level { color: var(--text2); font-size: 13px; min-width: 48px; text-align: center; }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<!-- ─── LOGIN ─────────────────────────────────────────── -->
+<div id="screen-login">
+  <div class="login-box">
+    <div style="text-align:center;margin-bottom:16px">
+      <button class="theme-toggle" id="theme-btn" title="Alternar tema">☀️</button>
+    </div>
+    <h2></h2>
+    <p class="error" id="login-error"></p>
+    <form id="login-form">
+      <div class="form-group"><label>Usuário</label><input type="text" id="login-user" required autofocus autocomplete="username"></div>
+      <div class="form-group"><label>Senha</label><input type="password" id="login-pass" required autocomplete="current-password"></div>
+      <button type="submit" class="btn btn-primary">Entrar</button>
+    </form>
+    <p class="muted">Servidor: <span id="server-label"></span></p>
+  </div>
+</div>
+
+<!-- ─── DASHBOARD ─────────────────────────────────────── -->
+<div id="screen-dashboard" class="hidden">
+  <div class="navbar">
+    <h1></h1>
+    <div class="nav-right">
+      <button class="theme-toggle" id="theme-btn2" title="Alternar tema">☀️</button>
+      <button class="linkish" id="logout-btn">Sair</button>
+    </div>
+  </div>
+  <div class="container">
+    <h2 style="margin-bottom:20px">Máquinas <span class="badge-count" id="machine-count">0</span></h2>
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Buscar por hostname, IP ou status..." autocomplete="off">
+      <span style="font-size:13px;color:var(--text2)" id="search-info"></span>
+    </div>
+    <div id="machines-table"></div>
+  </div>
+</div>
+
+<!-- ─── VIEWER ────────────────────────────────────────── -->
+<div id="screen-viewer" class="hidden">
+  <div class="navbar">
+    <h1></h1>
+    <div class="nav-right">
+      <button class="theme-toggle" id="theme-btn3" title="Alternar tema">☀️</button>
+      <button class="linkish" id="back-btn">← Voltar ao Dashboard</button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="viewer-container">
+      <div class="viewer-header">
+        <h2 id="viewer-hostname"></h2>
+        <span id="viewer-status" class="viewer-status status-offline">Conectando...</span>
+      </div>
+      <div class="fullscreen-area" id="fullscreen-area">
+        <div class="toolbar">
+          <div class="toolbar-group">
+            <label>Zoom</label>
+            <button class="btn-tool" id="zoom-out">−</button>
+            <span class="zoom-level" id="zoom-level">100%</span>
+            <button class="btn-tool" id="zoom-in">+</button>
+            <button class="btn-tool" id="zoom-fit">Ajustar</button>
+            <button class="btn-tool" id="zoom-reset">100%</button>
+          </div>
+          <div class="toolbar-group" id="monitor-toolbar">
+            <label>Monitor</label>
+            <button class="btn-tool active" data-monitor="0">Todos</button>
+          </div>
+          <div class="toolbar-group">
+            <button class="btn-tool" id="fullscreen-btn">⛶ Tela cheia</button>
+          </div>
+        </div>
+        <canvas id="screen"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+//  CONFIGURAÇÃO
+// ═══════════════════════════════════════════════════════════════
+const API_BASE = 'https://integracaowsslovable.smartnx.io';
+const WS_BASE  = API_BASE.replace(/^http/, 'ws');
+const POLL_MS  = 5000;
+
+// ═══════════════════════════════════════════════════════════════
+//  TEMA
+// ═══════════════════════════════════════════════════════════════
+(function initTheme() {
+  function apply(theme) {
+    if (theme === 'light') document.body.classList.add('light');
+    else document.body.classList.remove('light');
+    localStorage.setItem('theme', theme);
+    document.querySelectorAll('.theme-toggle').forEach(b => b.textContent = theme === 'light' ? '🌙' : '☀️');
+  }
+  apply(localStorage.getItem('theme') || 'dark');
+  document.querySelectorAll('.theme-toggle').forEach(btn =>
+    btn.addEventListener('click', () => apply(document.body.classList.contains('light') ? 'dark' : 'light'))
+  );
+})();
+
+// ═══════════════════════════════════════════════════════════════
+//  ESTADO / NAVEGAÇÃO
+// ═══════════════════════════════════════════════════════════════
+let token = localStorage.getItem('sv_token') || '';
+let pollTimer = null;
+
+const screens = {
+  login: document.getElementById('screen-login'),
+  dashboard: document.getElementById('screen-dashboard'),
+  viewer: document.getElementById('screen-viewer'),
+};
+function show(name) {
+  Object.values(screens).forEach(s => s.classList.add('hidden'));
+  screens[name].classList.remove('hidden');
+}
+document.getElementById('server-label').textContent = API_BASE;
+
+// ═══════════════════════════════════════════════════════════════
+//  LOGIN
+// ═══════════════════════════════════════════════════════════════
+const loginForm = document.getElementById('login-form');
+const loginError = document.getElementById('login-error');
+
+loginForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  loginError.textContent = '';
+  const username = document.getElementById('login-user').value;
+  const password = document.getElementById('login-pass').value;
+  try {
+    const res = await fetch(API_BASE + '/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    });
+    if (res.status === 401) { loginError.textContent = 'Usuário ou senha inválidos'; return; }
+    if (res.status === 429) { loginError.textContent = 'Muitas tentativas. Aguarde alguns minutos.'; return; }
+    if (!res.ok) { loginError.textContent = 'Erro no servidor (' + res.status + ')'; return; }
+    const data = await res.json();
+    token = data.token;
+    localStorage.setItem('sv_token', token);
+    document.getElementById('login-pass').value = '';
+    enterDashboard();
+  } catch (err) {
+    loginError.textContent = 'Falha de conexão/CORS. Verifique o servidor.';
+    console.error(err);
+  }
+});
+
+document.getElementById('logout-btn').addEventListener('click', () => {
+  token = '';
+  localStorage.removeItem('sv_token');
+  stopPolling();
+  show('login');
+});
+
+// ═══════════════════════════════════════════════════════════════
+//  DASHBOARD
+// ═══════════════════════════════════════════════════════════════
+const tableEl = document.getElementById('machines-table');
+const countEl = document.getElementById('machine-count');
+const searchInput = document.getElementById('search-input');
+const searchInfo = document.getElementById('search-info');
+
+function enterDashboard() {
+  show('dashboard');
+  fetchClients();
+  startPolling();
+}
+
+function startPolling() { stopPolling(); pollTimer = setInterval(fetchClients, POLL_MS); }
+function stopPolling()  { if (pollTimer) clearInterval(pollTimer); pollTimer = null; }
+
+async function fetchClients() {
+  try {
+    const res = await fetch(API_BASE + '/api/clients', {
+      headers: { 'Authorization': 'Bearer ' + token },
+    });
+    if (res.status === 401) { // token inválido/expirado
+      stopPolling();
+      token = ''; localStorage.removeItem('sv_token');
+      show('login');
+      loginError.textContent = 'Sessão expirada. Entre novamente.';
+      return;
+    }
+    if (!res.ok) return;
+    renderClients(await res.json());
+  } catch (err) {
+    console.error('fetchClients', err);
+  }
+}
+
+function fmtDate(ts) {
+  if (!ts) return '-';
+  return new Date(ts * 1000).toLocaleString('pt-BR');
+}
+
+function renderClients(list) {
+  countEl.textContent = list.length;
+  if (!list.length) {
+    tableEl.innerHTML = '<div class="empty">Nenhuma máquina conectada ainda.</div>';
+    applyFilter();
+    return;
+  }
+  list.sort((a, b) => (a.hostname || a.id).toLowerCase().localeCompare((b.hostname || b.id).toLowerCase()));
+  let rows = '';
+  for (const c of list) {
+    const cls = c.online ? 'status-online' : 'status-offline';
+    const txt = c.online ? 'Online' : 'Offline';
+    rows += '<tr>'
+      + '<td>' + esc(c.hostname || c.id) + '</td>'
+      + '<td>' + esc(c.ip || '-') + '</td>'
+      + '<td>' + esc(c.resolution || '-') + '</td>'
+      + '<td><span class="status ' + cls + '">' + txt + '</span></td>'
+      + '<td>' + fmtDate(c.last_seen) + '</td>'
+      + '<td><button class="btn btn-view" data-id="' + esc(c.id) + '" data-host="' + esc(c.hostname || c.id) + '">Visualizar</button></td>'
+      + '</tr>';
+  }
+  tableEl.innerHTML = '<table><thead><tr>'
+    + '<th>Hostname</th><th>IP</th><th>Resolução</th><th>Status</th><th>Última atividade</th><th>Ação</th>'
+    + '</tr></thead><tbody>' + rows + '</tbody></table>';
+  tableEl.querySelectorAll('.btn-view').forEach(btn =>
+    btn.addEventListener('click', () => openViewer(btn.dataset.id, btn.dataset.host))
+  );
+  applyFilter();
+}
+
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+}
+
+// Filtro de busca
+searchInput.addEventListener('input', applyFilter);
+function applyFilter() {
+  const term = searchInput.value.trim().toLowerCase();
+  const rows = tableEl.querySelectorAll('tbody tr');
+  let visible = 0;
+  rows.forEach(row => {
+    const match = !term || row.textContent.toLowerCase().includes(term);
+    row.style.display = match ? '' : 'none';
+    if (match) visible++;
+  });
+  searchInfo.textContent = term && rows.length ? (visible + ' de ' + rows.length + ' máquina(s)') : '';
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  VIEWER
+// ═══════════════════════════════════════════════════════════════
+const canvas = document.getElementById('screen');
+const ctx = canvas.getContext('2d');
+const vStatus = document.getElementById('viewer-status');
+const fsArea = document.getElementById('fullscreen-area');
+const fsBtn = document.getElementById('fullscreen-btn');
+
+let ws = null;
+let wsClientId = null;
+let zoomScale = 1.0;
+const ZOOM_STEP = 0.25, ZOOM_MIN = 0.10, ZOOM_MAX = 5.0;
+let imgWidth = 0, imgHeight = 0;
+let selectedMonitor = 0;
+let monitorInfo = null;
+
+document.getElementById('back-btn').addEventListener('click', () => {
+  closeViewer();
+  enterDashboard();
+});
+
+function openViewer(clientId, hostname) {
+  stopPolling();
+  document.getElementById('viewer-hostname').textContent = hostname;
+  selectedMonitor = 0;
+  monitorInfo = null;
+  resetMonitorButtons();
+  show('viewer');
+  connectWs(clientId);
+}
+
+function closeViewer() {
+  wsClientId = null;
+  if (ws) { try { ws.onclose = null; ws.close(); } catch (e) {} ws = null; }
+}
+
+function connectWs(clientId) {
+  wsClientId = clientId;
+  ws = new WebSocket(WS_BASE + '/ws/view/' + encodeURIComponent(clientId) + '?token=' + encodeURIComponent(token));
+  ws.binaryType = 'arraybuffer';
+
+  ws.onopen = () => { vStatus.textContent = 'Ao vivo'; vStatus.className = 'viewer-status status-online'; };
+
+  ws.onmessage = (e) => {
+    if (typeof e.data === 'string') {
+      try {
+        const info = JSON.parse(e.data);
+        if (info.resolution) {
+          const p = info.resolution.split('x');
+          if (p.length === 2) {
+            const w = parseInt(p[0], 10), h = parseInt(p[1], 10);
+            if (w > 0 && h > 0) {
+              monitorInfo = detectMonitors(w, h);
+              if (monitorInfo.count > 1) buildMonitorButtons(monitorInfo.count);
+            }
+          }
+        }
+        if (info.monitors_count != null && info.monitors_count > 0) buildMonitorButtons(info.monitors_count);
+      } catch (ex) {}
+      return;
+    }
+    const url = URL.createObjectURL(new Blob([e.data], { type: 'image/jpeg' }));
+    const img = new Image();
+    img.onload = () => {
+      if (selectedMonitor === 0 || !monitorInfo || monitorInfo.count <= 1) {
+        canvas.width = img.width; canvas.height = img.height;
+        imgWidth = img.width; imgHeight = img.height;
+        ctx.drawImage(img, 0, 0);
+      } else if (monitorInfo.layout === 'h') {
+        const cropW = Math.round(img.width / monitorInfo.count);
+        const sx = (selectedMonitor - 1) * cropW;
+        canvas.width = cropW; canvas.height = img.height;
+        imgWidth = cropW; imgHeight = img.height;
+        ctx.drawImage(img, sx, 0, cropW, img.height, 0, 0, cropW, img.height);
+      } else {
+        const cropH = Math.round(img.height / monitorInfo.count);
+        const sy = (selectedMonitor - 1) * cropH;
+        canvas.width = img.width; canvas.height = cropH;
+        imgWidth = img.width; imgHeight = cropH;
+        ctx.drawImage(img, 0, sy, img.width, cropH, 0, 0, img.width, cropH);
+      }
+      URL.revokeObjectURL(url);
+      updateZoom();
+    };
+    img.src = url;
+  };
+
+  ws.onclose = () => {
+    vStatus.textContent = 'Desconectado';
+    vStatus.className = 'viewer-status status-offline';
+    if (wsClientId) setTimeout(() => { if (wsClientId) connectWs(wsClientId); }, 3000);
+  };
+  ws.onerror = () => { try { ws.close(); } catch (e) {} };
+}
+
+// Detecção de múltiplos monitores (mesma lógica do servidor)
+function detectMonitors(w, h) {
+  const cw = [3840, 2560, 1920, 1680, 1600, 1440, 1366, 1280, 1024];
+  const ch = [2160, 1440, 1200, 1080, 1024, 900, 800, 768, 720, 600];
+  for (let i = 0; i < cw.length; i++) {
+    if (w > cw[i] && w % cw[i] === 0 && ch.indexOf(h) !== -1) {
+      const n = w / cw[i];
+      if (n >= 2 && n <= 6) return { count: n, layout: 'h', mw: cw[i], mh: h };
+    }
+  }
+  for (let i = 0; i < ch.length; i++) {
+    if (h > ch[i] && h % ch[i] === 0 && cw.indexOf(w) !== -1) {
+      const n = h / ch[i];
+      if (n >= 2 && n <= 6) return { count: n, layout: 'v', mw: w, mh: ch[i] };
+    }
+  }
+  return { count: 1, layout: 's', mw: w, mh: h };
+}
+
+const monitorToolbar = document.getElementById('monitor-toolbar');
+function resetMonitorButtons() {
+  monitorToolbar.querySelectorAll('[data-monitor]').forEach(b => { if (b.dataset.monitor !== '0') b.remove(); });
+  const all = monitorToolbar.querySelector('[data-monitor="0"]');
+  monitorToolbar.querySelectorAll('.btn-tool').forEach(b => b.classList.remove('active'));
+  if (all) all.classList.add('active');
+}
+function buildMonitorButtons(count) {
+  const existing = monitorToolbar.querySelectorAll('[data-monitor]');
+  if (existing.length - 1 === count) return;
+  const active = monitorToolbar.querySelector('.btn-tool.active');
+  const activeMonitor = active ? parseInt(active.dataset.monitor, 10) : 0;
+  existing.forEach(b => { if (b.dataset.monitor !== '0') b.remove(); });
+  for (let i = 1; i <= count; i++) {
+    const btn = document.createElement('button');
+    btn.className = 'btn-tool' + (i === activeMonitor ? ' active' : '');
+    btn.dataset.monitor = i;
+    btn.textContent = 'Monitor ' + i;
+    monitorToolbar.appendChild(btn);
+  }
+}
+monitorToolbar.addEventListener('click', (e) => {
+  const btn = e.target.closest('[data-monitor]');
+  if (!btn) return;
+  selectedMonitor = parseInt(btn.dataset.monitor, 10);
+  monitorToolbar.querySelectorAll('.btn-tool').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ monitor: selectedMonitor }));
+});
+
+// Zoom
+function updateZoom() {
+  canvas.style.width = Math.ceil(imgWidth * zoomScale) + 'px';
+  canvas.style.height = Math.ceil(imgHeight * zoomScale) + 'px';
+  document.getElementById('zoom-level').textContent = Math.round(zoomScale * 100) + '%';
+}
+document.getElementById('zoom-in').addEventListener('click', () => { zoomScale = Math.min(ZOOM_MAX, zoomScale + ZOOM_STEP); updateZoom(); });
+document.getElementById('zoom-out').addEventListener('click', () => { zoomScale = Math.max(ZOOM_MIN, zoomScale - ZOOM_STEP); updateZoom(); });
+document.getElementById('zoom-reset').addEventListener('click', () => { zoomScale = 1.0; updateZoom(); });
+document.getElementById('zoom-fit').addEventListener('click', () => {
+  if (imgWidth > 0) {
+    const containerW = canvas.parentElement.clientWidth;
+    const availH = window.innerHeight - 200;
+    zoomScale = Math.min(containerW / imgWidth, availH / imgHeight);
+    updateZoom();
+  }
+});
+canvas.addEventListener('wheel', (e) => {
+  if (e.ctrlKey) {
+    e.preventDefault();
+    zoomScale = e.deltaY < 0 ? Math.min(ZOOM_MAX, zoomScale + ZOOM_STEP) : Math.max(ZOOM_MIN, zoomScale - ZOOM_STEP);
+    updateZoom();
+  }
+}, { passive: false });
+
+// Fullscreen
+fsBtn.addEventListener('click', () => {
+  if (document.fullscreenElement) document.exitFullscreen();
+  else fsArea.requestFullscreen().catch(() => {});
+});
+document.addEventListener('fullscreenchange', () => {
+  fsBtn.textContent = document.fullscreenElement ? '✖ Sair' : '⛶ Tela cheia';
+});
+
+// ═══════════════════════════════════════════════════════════════
+//  BOOT
+// ═══════════════════════════════════════════════════════════════
+if (token) enterDashboard();
+else show('login');
+</script>
+</body>
+</html>
