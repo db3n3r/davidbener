@@ -92,6 +92,7 @@
       <div class="form-group"><label>Senha</label><input type="password" id="login-pass" required autocomplete="current-password"></div>
       <button type="submit" class="btn btn-primary">Entrar</button>
     </form>
+    <p class="muted">Servidor: <span id="server-label"></span></p>
   </div>
 </div>
 
@@ -192,7 +193,8 @@ function show(name) {
   Object.values(screens).forEach(s => s.classList.add('hidden'));
   screens[name].classList.remove('hidden');
 }
-document.getElementById('server-label').textContent = API_BASE;
+const _lbl = document.getElementById('server-label');
+if (_lbl) _lbl.textContent = API_BASE;
 
 // ═══════════════════════════════════════════════════════════════
 //  LOGIN
