@@ -688,41 +688,6 @@
 
         .nav-links .nav-cta.active { color: #000; background: var(--gold); }
 
-        /* Spotlight que segue o mouse (bem sutil) */
-        .cursor-glow {
-            position: fixed;
-            width: 500px;
-            height: 500px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(245, 197, 24, 0.05), transparent 65%);
-            pointer-events: none;
-            z-index: 1;
-            transform: translate(-50%, -50%);
-            transition: opacity 0.3s;
-            opacity: 0;
-        }
-
-        /* Brilho que segue o mouse dentro dos cards */
-        .skill-group, .cert-card, .pillar {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill-group::before, .cert-card::before, .pillar::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), rgba(245, 197, 24, 0.08), transparent 65%);
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-
-        .skill-group:hover::before, .cert-card:hover::before, .pillar:hover::before { opacity: 1; }
-
-        .skill-group > *, .cert-card > *, .pillar > * { position: relative; }
-
         /* Terminal do hero clicável */
         .terminal { cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s; }
 
@@ -865,6 +830,84 @@
         .to-top.show { opacity: 1; visibility: visible; transform: none; }
         .to-top:hover { color: var(--gold); border-color: var(--gold-border); }
 
+        /* ============ NÍVEL 2 ============ */
+
+        /* Scrollbar customizada */
+        html { scrollbar-width: thin; scrollbar-color: #2a3348 var(--bg); }
+        ::-webkit-scrollbar { width: 11px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb {
+            background: #2a3348;
+            border-radius: 99px;
+            border: 3px solid var(--bg);
+        }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+        /* Rede de nós animada (canvas de fundo) */
+        .net-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Tilt 3D na foto */
+        .hero-visual { perspective: 900px; }
+
+        .avatar-frame {
+            transition: transform 0.15s ease-out;
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+
+        .avatar-frame .glare {
+            position: absolute;
+            inset: 0;
+            border-radius: 22px;
+            background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 255, 255, 0.22), transparent 55%);
+            opacity: 0;
+            transition: opacity 0.25s;
+            pointer-events: none;
+        }
+
+        .avatar-frame:hover .glare { opacity: 1; }
+
+        /* Stats com contadores */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-top: 30px;
+        }
+
+        .stat {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 18px 12px;
+            text-align: center;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .stat:hover { border-color: var(--gold-border); transform: translateY(-3px); }
+
+        .stat .num {
+            display: block;
+            font-family: var(--mono);
+            font-size: clamp(1.4rem, 3vw, 1.8rem);
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: -0.02em;
+        }
+
+        .stat .lbl {
+            display: block;
+            font-size: 0.76rem;
+            color: var(--text-faint);
+            margin-top: 4px;
+        }
+
         /* Reveal on scroll */
         .reveal {
             opacity: 0;
@@ -924,8 +967,8 @@
 </head>
 
 <body>
+    <canvas class="net-canvas" id="netCanvas" aria-hidden="true"></canvas>
     <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
-    <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
     <!-- ============ NAV ============ -->
     <header class="nav">
@@ -966,8 +1009,9 @@
                 </div>
 
                 <div class="hero-visual">
-                    <div class="avatar-frame">
+                    <div class="avatar-frame" id="avatarFrame">
                         <img src="user-320.jpg" alt="Foto de David Bener" width="230" height="230" fetchpriority="high">
+                        <div class="glare" aria-hidden="true"></div>
                     </div>
                     <div class="terminal" id="heroTerm" role="button" tabindex="0" aria-label="Abrir terminal interativo">
                         <div class="terminal-bar">
@@ -1000,6 +1044,20 @@
                         <p>Sou profissional de infraestrutura de TI com foco em <strong>soluções cloud, automação e DevOps</strong>. Tenho experiência sólida em AWS e Oracle Cloud, containerização e segurança de redes.</p>
                         <p>Meu objetivo é sempre o mesmo: <strong>otimizar processos e entregar soluções robustas</strong> — infraestrutura como código, ambientes reproduzíveis e operação segura, do provisionamento ao monitoramento.</p>
                         <p>Certificado pela AWS, Oracle, Google, Cisco e Fortinet.</p>
+                        <div class="stats-row">
+                            <div class="stat">
+                                <span class="num" data-target="10" data-suffix="+">0</span>
+                                <span class="lbl">certificações verificáveis</span>
+                            </div>
+                            <div class="stat">
+                                <span class="num" data-target="5">0</span>
+                                <span class="lbl">big techs emissoras</span>
+                            </div>
+                            <div class="stat">
+                                <span class="num" data-target="99.9" data-decimals="1" data-suffix="%">0</span>
+                                <span class="lbl">uptime como meta</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="pillars reveal">
                         <div class="pillar">
@@ -1333,24 +1391,7 @@
             document.querySelectorAll('main section[id]').forEach(function (s) { sectionObs.observe(s); });
         }
 
-        // ============ Spotlight + brilho nos cards (só desktop, sem reduced motion) ============
         var finePointer = window.matchMedia('(pointer: fine)').matches;
-        if (finePointer && !reduceMotion) {
-            var glow = document.getElementById('cursorGlow');
-            document.addEventListener('mousemove', function (e) {
-                glow.style.left = e.clientX + 'px';
-                glow.style.top = e.clientY + 'px';
-                glow.style.opacity = '1';
-            }, { passive: true });
-
-            document.querySelectorAll('.skill-group, .cert-card, .pillar').forEach(function (card) {
-                card.addEventListener('mousemove', function (e) {
-                    var r = card.getBoundingClientRect();
-                    card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-                    card.style.setProperty('--my', (e.clientY - r.top) + 'px');
-                }, { passive: true });
-            });
-        }
 
         // ============ Animação de digitação no terminal do hero ============
         var heroLines = [
@@ -1446,6 +1487,15 @@
                 setTimeout(function () { window.location.href = 'matrix-efect.html'; }, 800);
                 return '<span class="t-gold">Wake up, Neo...</span>';
             },
+            history: function () {
+                return termHistory.length
+                    ? termHistory.map(function (c, i) { return '  ' + (i + 1) + '  ' + c.replace(/</g, '&lt;'); }).join('\n')
+                    : 'histórico vazio.';
+            },
+            ping: function () {
+                return 'PING davidbener.com (☁️): 64 bytes\n64 bytes: icmp_seq=1 ttl=64 time=0.42 ms\n64 bytes: icmp_seq=2 ttl=64 time=0.38 ms\n--- davidbener.com --- <span class="t-gold">0% packet loss</span> — sempre no ar.';
+            },
+            uptime: function () { return 'up desde sempre · load average: café, cloud, código'; },
             clear: function () { termOutput.innerHTML = ''; return null; },
             exit: function () { closeTerm(); return null; }
         };
@@ -1470,6 +1520,8 @@
 
             if (cmd === 'sudo') {
                 termPrint('<span class="t-err">visitante não está no arquivo sudoers. Este incidente será reportado.</span>');
+            } else if (cmd === 'echo') {
+                termPrint('<span class="t-out">' + parts.slice(1).join(' ').replace(/</g, '&lt;') + '</span>');
             } else if (cmd === 'cd') {
                 var dest = (parts[1] || '').replace(/\/$/, '');
                 var map = { sobre: 'sobre', skills: 'skills', certificacoes: 'certificacoes', certs: 'certificacoes', contato: 'contato', contact: 'contato' };
@@ -1517,6 +1569,17 @@
                 e.preventDefault();
                 if (histIdx < termHistory.length - 1) termInput.value = termHistory[++histIdx];
                 else { histIdx = termHistory.length; termInput.value = ''; }
+            } else if (e.key === 'Tab') {
+                e.preventDefault();
+                var partial = termInput.value.trim().toLowerCase();
+                if (!partial) return;
+                var all = Object.keys(TERM_COMMANDS).concat(['sudo', 'cd', 'echo']);
+                var matches = all.filter(function (c) { return c.indexOf(partial) === 0; });
+                if (matches.length === 1) {
+                    termInput.value = matches[0] + ' ';
+                } else if (matches.length > 1) {
+                    termPrint('<span class="t-out">' + matches.join('  ') + '</span>');
+                }
             }
         });
 
@@ -1536,6 +1599,174 @@
             kIdx = (e.key === konami[kIdx]) ? kIdx + 1 : (e.key === konami[0] ? 1 : 0);
             if (kIdx === konami.length) { kIdx = 0; window.location.href = 'matrix-efect.html'; }
         });
+
+        // ============ Rede de nós animada (fundo) ============
+        (function () {
+            if (reduceMotion) return;
+            var canvas = document.getElementById('netCanvas');
+            var ctx = canvas.getContext('2d');
+            var W, H, nodes = [];
+            var mouse = { x: -9999, y: -9999 };
+            var running = !document.hidden;
+
+            function resize() {
+                W = canvas.width = window.innerWidth;
+                H = canvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            var COUNT = window.innerWidth < 760 ? 32 : 68;
+            for (var i = 0; i < COUNT; i++) {
+                nodes.push({
+                    x: Math.random() * window.innerWidth,
+                    y: Math.random() * window.innerHeight,
+                    vx: (Math.random() - 0.5) * 0.35,
+                    vy: (Math.random() - 0.5) * 0.35,
+                    r: 1 + Math.random() * 1.4,
+                    cyan: Math.random() < 0.22
+                });
+            }
+
+            if (finePointer) {
+                document.addEventListener('mousemove', function (e) {
+                    mouse.x = e.clientX; mouse.y = e.clientY;
+                }, { passive: true });
+            }
+
+            document.addEventListener('visibilitychange', function () { running = !document.hidden; });
+
+            var LINK = 130, MOUSE_LINK = 170;
+
+            function frame() {
+                requestAnimationFrame(frame);
+                if (!running) return;
+                ctx.clearRect(0, 0, W, H);
+
+                for (var i = 0; i < COUNT; i++) {
+                    var n = nodes[i];
+                    n.x += n.vx; n.y += n.vy;
+                    if (n.x < -20) n.x = W + 20; else if (n.x > W + 20) n.x = -20;
+                    if (n.y < -20) n.y = H + 20; else if (n.y > H + 20) n.y = -20;
+                }
+
+                for (var i = 0; i < COUNT; i++) {
+                    var a = nodes[i];
+                    for (var j = i + 1; j < COUNT; j++) {
+                        var b = nodes[j];
+                        var dx = a.x - b.x, dy = a.y - b.y;
+                        var d = dx * dx + dy * dy;
+                        if (d < LINK * LINK) {
+                            var alpha = (1 - Math.sqrt(d) / LINK) * 0.14;
+                            ctx.strokeStyle = 'rgba(245, 197, 24, ' + alpha + ')';
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.moveTo(a.x, a.y);
+                            ctx.lineTo(b.x, b.y);
+                            ctx.stroke();
+                        }
+                    }
+
+                    var mdx = a.x - mouse.x, mdy = a.y - mouse.y;
+                    var md = mdx * mdx + mdy * mdy;
+                    if (md < MOUSE_LINK * MOUSE_LINK) {
+                        var malpha = (1 - Math.sqrt(md) / MOUSE_LINK) * 0.28;
+                        ctx.strokeStyle = 'rgba(245, 197, 24, ' + malpha + ')';
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(a.x, a.y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.stroke();
+                    }
+
+                    ctx.fillStyle = a.cyan ? 'rgba(0, 188, 212, 0.5)' : 'rgba(245, 197, 24, 0.45)';
+                    ctx.beginPath();
+                    ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+            frame();
+        })();
+
+        // ============ Tilt 3D + glare na foto ============
+        (function () {
+            if (!finePointer || reduceMotion) return;
+            var frame = document.getElementById('avatarFrame');
+
+            frame.addEventListener('mousemove', function (e) {
+                var r = frame.getBoundingClientRect();
+                var px = (e.clientX - r.left) / r.width;
+                var py = (e.clientY - r.top) / r.height;
+                frame.style.transform = 'rotateY(' + ((px - 0.5) * 14) + 'deg) rotateX(' + ((0.5 - py) * 14) + 'deg)';
+                frame.style.setProperty('--gx', (px * 100) + '%');
+                frame.style.setProperty('--gy', (py * 100) + '%');
+            }, { passive: true });
+
+            frame.addEventListener('mouseleave', function () { frame.style.transform = ''; });
+        })();
+
+        // ============ Botões magnéticos ============
+        (function () {
+            if (!finePointer || reduceMotion) return;
+            document.querySelectorAll('.hero-actions .btn').forEach(function (btn) {
+                btn.addEventListener('mousemove', function (e) {
+                    var r = btn.getBoundingClientRect();
+                    var x = e.clientX - r.left - r.width / 2;
+                    var y = e.clientY - r.top - r.height / 2;
+                    btn.style.transform = 'translate(' + (x * 0.18) + 'px, ' + (y * 0.35) + 'px)';
+                }, { passive: true });
+                btn.addEventListener('mouseleave', function () { btn.style.transform = ''; });
+            });
+        })();
+
+        // ============ Contadores animados ============
+        (function () {
+            var nums = document.querySelectorAll('.stat .num');
+            if (!nums.length) return;
+
+            function animate(el) {
+                var target = parseFloat(el.dataset.target);
+                var decimals = parseInt(el.dataset.decimals || '0', 10);
+                var suffix = el.dataset.suffix || '';
+                if (reduceMotion) { el.textContent = target.toFixed(decimals) + suffix; return; }
+                var start = null;
+
+                function step(ts) {
+                    if (!start) start = ts;
+                    var p = Math.min((ts - start) / 1200, 1);
+                    var eased = 1 - Math.pow(1 - p, 3);
+                    el.textContent = (target * eased).toFixed(decimals) + suffix;
+                    if (p < 1) requestAnimationFrame(step);
+                }
+                requestAnimationFrame(step);
+            }
+
+            if ('IntersectionObserver' in window) {
+                var obs = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) { animate(entry.target); obs.unobserve(entry.target); }
+                    });
+                }, { threshold: 0.6 });
+                nums.forEach(function (n) { obs.observe(n); });
+            } else {
+                nums.forEach(animate);
+            }
+        })();
+
+        // ============ Reveal em cascata ============
+        document.querySelectorAll('.cert-grid, .skills-groups').forEach(function (group) {
+            Array.prototype.forEach.call(group.children, function (el, i) {
+                if (el.classList.contains('reveal')) el.style.transitionDelay = (i % 4) * 90 + 'ms';
+            });
+        });
+
+        // ============ Título da aba quando o visitante sai ============
+        (function () {
+            var original = document.title;
+            document.addEventListener('visibilitychange', function () {
+                document.title = document.hidden ? '⚡ Volte logo! — David Bener' : original;
+            });
+        })();
     </script>
 </body>
 </html>
