@@ -4,25 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>David Bener | Analista de Infraestrutura de TI — Cloud & DevOps</title>
+    <title>David Bener | Analista de Infraestrutura de TI</title>
     <meta name="description" content="David Bener - Analista de Infraestrutura de TI especializado em Cloud, DevOps, AWS, Oracle Cloud e automação. Veja meu portfólio e certificações.">
     <meta name="author" content="David Bener">
+    <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://davidbener.com/">
 
     <!-- Open Graph / redes sociais -->
+    <meta property="og:site_name" content="David Bener">
     <meta property="og:title" content="David Bener | Infraestrutura de TI">
     <meta property="og:description" content="Analista de Infraestrutura de TI especializado em Cloud, DevOps e automação">
     <meta property="og:image" content="https://davidbener.com/user.jpg">
+    <meta property="og:image:alt" content="Foto de David Bener">
     <meta property="og:url" content="https://davidbener.com/">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="pt_BR">
+    <meta property="og:locale:alternate" content="en_US">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="David Bener | Infraestrutura de TI">
     <meta name="twitter:description" content="Analista de Infraestrutura de TI especializado em Cloud, DevOps e automação">
     <meta name="twitter:image" content="https://davidbener.com/user.jpg">
     <meta name="theme-color" content="#0a0e14">
 
-  
+    <link rel="manifest" href="site.webmanifest">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,16 +37,44 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "David Bener",
-      "url": "https://davidbener.com",
-      "image": "https://davidbener.com/user.jpg",
-      "jobTitle": "Analista de Infraestrutura de TI",
-      "email": "mailto:contato@davidbener.com",
-      "knowsAbout": ["AWS", "Oracle Cloud", "Linux", "Docker", "Terraform", "Python", "DevOps", "Cybersecurity"],
-      "sameAs": [
-        "https://github.com/db3n3r",
-        "https://linkedin.com/in/davidbener"
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://davidbener.com/#david",
+          "name": "David Bener",
+          "url": "https://davidbener.com",
+          "image": "https://davidbener.com/user.jpg",
+          "jobTitle": "Analista de Infraestrutura de TI",
+          "description": "Analista de Infraestrutura de TI especializado em Cloud, DevOps, AWS, Oracle Cloud e automação.",
+          "email": "mailto:contato@davidbener.com",
+          "knowsLanguage": ["pt-BR", "en"],
+          "knowsAbout": ["AWS", "Oracle Cloud", "Linux", "Docker", "Terraform", "Python", "DevOps", "Cybersecurity"],
+          "sameAs": [
+            "https://github.com/db3n3r",
+            "https://linkedin.com/in/davidbener"
+          ],
+          "hasCredential": [
+            { "@type": "EducationalOccupationalCredential", "name": "AWS Certified Cloud Practitioner", "credentialCategory": "certificate", "recognizedBy": { "@type": "Organization", "name": "Amazon Web Services" } },
+            { "@type": "EducationalOccupationalCredential", "name": "Oracle Cloud Infrastructure 2025 Certified", "credentialCategory": "certificate", "recognizedBy": { "@type": "Organization", "name": "Oracle" } },
+            { "@type": "EducationalOccupationalCredential", "name": "Google Cybersecurity Professional", "credentialCategory": "certificate", "recognizedBy": { "@type": "Organization", "name": "Google" } },
+            { "@type": "EducationalOccupationalCredential", "name": "Fortinet Certified Associate Cybersecurity", "credentialCategory": "certificate", "recognizedBy": { "@type": "Organization", "name": "Fortinet" } },
+            { "@type": "EducationalOccupationalCredential", "name": "Ethical Hacker", "credentialCategory": "certificate", "recognizedBy": { "@type": "Organization", "name": "Cisco" } }
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://davidbener.com/#site",
+          "url": "https://davidbener.com/",
+          "name": "David Bener",
+          "inLanguage": "pt-BR",
+          "publisher": { "@id": "https://davidbener.com/#david" }
+        },
+        {
+          "@type": "ProfilePage",
+          "url": "https://davidbener.com/",
+          "isPartOf": { "@id": "https://davidbener.com/#site" },
+          "about": { "@id": "https://davidbener.com/#david" }
+        }
       ]
     }
     </script>
@@ -57,8 +89,8 @@
             --gold-soft: rgba(245, 197, 24, 0.12);
             --gold-border: rgba(245, 197, 24, 0.35);
             --text: #e8ecf3;
-            --text-dim: #9aa5b5;
-            --text-faint: #66707f;
+            --text-dim: #a5b0c0;
+            --text-faint: #808c9d;
             --green: #3ddc84;
             --mono: 'JetBrains Mono', monospace;
             --sans: 'Space Grotesk', sans-serif;
@@ -96,6 +128,27 @@
         }
 
         ::selection { background: var(--gold); color: #000; }
+
+        /* Pular para o conteúdo (aparece só no teclado) */
+        .skip-link {
+            position: absolute;
+            left: 50%;
+            top: 12px;
+            transform: translate(-50%, -160%);
+            z-index: 400;
+            padding: 11px 20px;
+            border-radius: 10px;
+            background: var(--gold);
+            color: #000;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .skip-link:focus-visible { transform: translate(-50%, 0); }
+
+        /* Trava a rolagem do fundo enquanto o terminal está aberto */
+        body.no-scroll { overflow: hidden; }
 
         .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
 
@@ -526,12 +579,14 @@
         .cert-card .cert-info { flex: 1; min-width: 0; }
 
         .cert-card .cert-name {
+            display: block;
             font-size: 0.93rem;
             font-weight: 600;
             line-height: 1.35;
         }
 
         .cert-card .cert-meta {
+            display: block;
             font-family: var(--mono);
             font-size: 0.72rem;
             color: var(--text-faint);
@@ -562,19 +617,53 @@
         .contact-line {
             display: flex;
             align-items: center;
-            gap: 14px;
-            padding: 15px 18px;
             background: var(--card);
             border: 1px solid var(--card-border);
             border-radius: 12px;
-            color: var(--text);
-            font-size: 0.93rem;
             transition: border-color 0.2s, transform 0.2s;
         }
 
         .contact-line:hover { border-color: var(--gold-border); transform: translateX(4px); }
-        .contact-line i { color: var(--gold); width: 20px; text-align: center; }
-        .contact-line span { color: var(--text-dim); font-family: var(--mono); font-size: 0.82rem; }
+
+        .contact-line > a {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex: 1;
+            min-width: 0;
+            padding: 15px 18px;
+            color: var(--text);
+            font-size: 0.93rem;
+        }
+
+        .contact-line i { color: var(--gold); width: 20px; text-align: center; flex-shrink: 0; }
+
+        .contact-line span {
+            color: var(--text-dim);
+            font-family: var(--mono);
+            font-size: 0.82rem;
+            overflow-wrap: anywhere;
+        }
+
+        .copy-btn {
+            flex-shrink: 0;
+            margin-right: 10px;
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9px;
+            border: 1px solid var(--card-border);
+            background: rgba(255, 255, 255, 0.035);
+            color: var(--text-faint);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: color 0.2s, border-color 0.2s, background 0.2s;
+        }
+
+        .copy-btn:hover { color: var(--gold); border-color: var(--gold-border); background: var(--gold-soft); }
+        .copy-btn.copied { color: var(--green); border-color: rgba(61, 220, 132, 0.4); background: rgba(61, 220, 132, 0.12); }
 
         .contact-form {
             background: var(--card);
@@ -907,6 +996,24 @@
             margin-top: 4px;
         }
 
+        /* ============ NÍVEL 3 ============ */
+
+        /* Botão de idioma */
+        .lang-toggle {
+            background: none;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: var(--text-dim);
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            padding: 7px 12px;
+            margin-left: 6px;
+            cursor: pointer;
+            transition: color 0.2s, border-color 0.2s, background 0.2s;
+        }
+
+        .lang-toggle:hover { color: var(--gold); border-color: var(--gold-border); background: var(--gold-soft); }
+
         /* Reveal on scroll */
         .reveal {
             opacity: 0;
@@ -958,14 +1065,60 @@
             .nav-links.open { display: flex; }
             .nav-links a { padding: 13px 14px; }
             .nav-links .nav-cta { margin-left: 0; text-align: center; }
+            .nav-links .lang-toggle { width: 100%; padding: 12px; margin: 6px 0 0; }
 
             section { padding: 66px 0; }
             .hero { padding-top: 100px; }
+        }
+
+        /* ============ IMPRESSÃO / SALVAR COMO PDF ============ */
+        @media print {
+            .nav, .net-canvas, .scroll-progress, .to-top, .term-overlay,
+            .terminal, .term-hint, .hero-actions, .contact-form, .copy-btn { display: none !important; }
+
+            html, body {
+                background: #fff !important;
+                color: #000 !important;
+                background-image: none !important;
+            }
+
+            body { font-size: 11pt; }
+            a { color: #000 !important; text-decoration: none; }
+
+            /* Mostra o destino dos links externos no papel, em linha própria */
+            .cert-card, .contact-line > a { flex-wrap: wrap; }
+
+            .cert-card::after, .contact-line > a::after {
+                content: attr(href);
+                flex-basis: 100%;
+                margin-top: 4px;
+                font-size: 8pt;
+                color: #555;
+                word-break: break-all;
+            }
+
+            .hero { min-height: auto; padding: 0 0 18px; }
+            .hero-grid { grid-template-columns: 1fr; gap: 18px; }
+            section { padding: 18px 0; page-break-inside: avoid; }
+
+            .section-head .kicker, .stat .lbl, .cert-meta, .group-title { color: #555 !important; }
+            .hero h1 .gold, .stat .num, .chip i, .pillar i, .cert-icon { color: #000 !important; -webkit-text-fill-color: #000 !important; }
+
+            .card, .stat, .pillar, .chip, .cert-card, .skill-group, .contact-line {
+                background: #fff !important;
+                border: 1px solid #ccc !important;
+                box-shadow: none !important;
+                opacity: 1 !important;
+            }
+
+            .reveal { opacity: 1 !important; transform: none !important; }
+            .avatar-frame::before, .avatar-frame .glare { display: none !important; }
         }
     </style>
 </head>
 
 <body>
+    <a href="#top" class="skip-link">Pular para o conteúdo</a>
     <canvas class="net-canvas" id="netCanvas" aria-hidden="true"></canvas>
     <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
@@ -983,11 +1136,12 @@
                 <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
                 <li><a href="#certificacoes" onclick="closeMenu()">Certificações</a></li>
                 <li><a href="#contato" class="nav-cta" onclick="closeMenu()">Fale comigo</a></li>
+                <li><button class="lang-toggle" id="langToggle" onclick="toggleLang()" aria-label="Switch to English">EN</button></li>
             </ul>
         </div>
     </header>
 
-    <main id="top">
+    <main id="top" tabindex="-1">
         <!-- ============ HERO ============ -->
         <section class="hero">
             <div class="wrap hero-grid">
@@ -1009,7 +1163,7 @@
 
                 <div class="hero-visual">
                     <div class="avatar-frame" id="avatarFrame">
-                        <img src="user-320.jpg" alt="Foto de David Bener" width="230" height="230" fetchpriority="high">
+                        <img src="user-320.jpg" alt="Foto de David Bener" width="230" height="230" fetchpriority="high" decoding="async">
                         <div class="glare" aria-hidden="true"></div>
                     </div>
                     <div class="terminal" id="heroTerm" role="button" tabindex="0" aria-label="Abrir terminal interativo">
@@ -1228,18 +1382,27 @@
                 <div class="contact-grid">
                     <div class="contact-info reveal">
                         <div class="contact-lines">
-                            <a href="mailto:contato@davidbener.com" class="contact-line">
-                                <i class="fas fa-envelope" aria-hidden="true"></i>
-                                <span>contato@davidbener.com</span>
-                            </a>
-                            <a href="https://linkedin.com/in/davidbener" target="_blank" rel="noopener noreferrer" class="contact-line">
-                                <i class="fab fa-linkedin-in" aria-hidden="true"></i>
-                                <span>linkedin.com/in/davidbener</span>
-                            </a>
-                            <a href="https://github.com/db3n3r" target="_blank" rel="noopener noreferrer" class="contact-line">
-                                <i class="fab fa-github" aria-hidden="true"></i>
-                                <span>github.com/db3n3r</span>
-                            </a>
+                            <div class="contact-line">
+                                <a href="mailto:contato@davidbener.com" aria-label="Email: contato@davidbener.com">
+                                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                                    <span>contato@davidbener.com</span>
+                                </a>
+                                <button type="button" class="copy-btn" data-copy="contato@davidbener.com" aria-label="Copiar email" title="Copiar email">
+                                    <i class="fas fa-copy" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <div class="contact-line">
+                                <a href="https://linkedin.com/in/davidbener" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn: linkedin.com/in/davidbener">
+                                    <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                                    <span>linkedin.com/in/davidbener</span>
+                                </a>
+                            </div>
+                            <div class="contact-line">
+                                <a href="https://github.com/db3n3r" target="_blank" rel="noopener noreferrer" aria-label="GitHub: github.com/db3n3r">
+                                    <i class="fab fa-github" aria-hidden="true"></i>
+                                    <span>github.com/db3n3r</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <form id="myForm" class="contact-form reveal">
@@ -1299,17 +1462,34 @@
 
     <script>
         // Menu mobile
+        var navLinksEl = document.getElementById('navLinks');
+        var navToggleBtn = document.querySelector('.nav-toggle');
+
         function toggleMenu() {
-            var links = document.getElementById('navLinks');
-            var btn = document.querySelector('.nav-toggle');
-            var open = links.classList.toggle('open');
-            btn.setAttribute('aria-expanded', open);
+            var open = navLinksEl.classList.toggle('open');
+            navToggleBtn.setAttribute('aria-expanded', open);
         }
 
         function closeMenu() {
-            document.getElementById('navLinks').classList.remove('open');
-            document.querySelector('.nav-toggle').setAttribute('aria-expanded', 'false');
+            navLinksEl.classList.remove('open');
+            navToggleBtn.setAttribute('aria-expanded', 'false');
         }
+
+        // Fecha o menu ao clicar fora, ao apertar Esc ou ao voltar para desktop
+        document.addEventListener('click', function (e) {
+            if (navLinksEl.classList.contains('open') && !e.target.closest('.nav-inner')) closeMenu();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && navLinksEl.classList.contains('open')) {
+                closeMenu();
+                navToggleBtn.focus();
+            }
+        });
+
+        window.matchMedia('(min-width: 761px)').addEventListener('change', function (e) {
+            if (e.matches) closeMenu();
+        });
 
         // Reveal on scroll (desativado para quem prefere menos movimento)
         var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1334,7 +1514,7 @@
             var feedback = document.getElementById('feedbackMsg');
             var submitBtn = this.querySelector('button[type="submit"]');
 
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Enviando...';
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> ' + (currentLang === 'en' ? 'Sending...' : 'Enviando...');
             submitBtn.disabled = true;
             feedback.style.display = 'none';
 
@@ -1345,22 +1525,24 @@
                 .then(function (response) { return response.json(); })
                 .then(function (data) {
                     if (data.success) {
-                        feedback.textContent = 'Mensagem enviada com sucesso!';
+                        feedback.textContent = currentLang === 'en' ? 'Message sent successfully!' : 'Mensagem enviada com sucesso!';
                         feedback.className = 'feedback-message feedback-success';
                         document.getElementById('myForm').reset();
                     } else {
-                        feedback.textContent = data.message || 'Erro ao enviar mensagem.';
+                        feedback.textContent = data.message || (currentLang === 'en' ? 'Error sending message.' : 'Erro ao enviar mensagem.');
                         feedback.className = 'feedback-message feedback-error';
                     }
                     feedback.style.display = 'block';
                 })
                 .catch(function () {
-                    feedback.textContent = 'Oops... algo deu errado! Tente novamente.';
+                    feedback.textContent = currentLang === 'en' ? 'Oops... something went wrong! Try again.' : 'Oops... algo deu errado! Tente novamente.';
                     feedback.className = 'feedback-message feedback-error';
                     feedback.style.display = 'block';
                 })
                 .finally(function () {
-                    submitBtn.innerHTML = '<i class="fas fa-paper-plane" aria-hidden="true"></i> Enviar mensagem';
+                    submitBtn.innerHTML = currentLang === 'en'
+                        ? '<i class="fas fa-paper-plane" aria-hidden="true"></i> Send message'
+                        : '<i class="fas fa-paper-plane" aria-hidden="true"></i> Enviar mensagem';
                     submitBtn.disabled = false;
                 });
         });
@@ -1368,11 +1550,20 @@
         // ============ Barra de progresso de scroll + botão voltar ao topo ============
         var progressBar = document.getElementById('scrollProgress');
         var toTopBtn = document.getElementById('toTop');
+        var scrollTicking = false;
 
-        window.addEventListener('scroll', function () {
+        function onScrollFrame() {
+            scrollTicking = false;
             var max = document.documentElement.scrollHeight - window.innerHeight;
             progressBar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
             toTopBtn.classList.toggle('show', window.scrollY > 600);
+        }
+
+        window.addEventListener('scroll', function () {
+            if (!scrollTicking) {
+                scrollTicking = true;
+                requestAnimationFrame(onScrollFrame);
+            }
         }, { passive: true });
 
         // ============ Destaque da seção ativa no menu ============
@@ -1440,31 +1631,97 @@
         var termHistory = [];
         var histIdx = -1;
 
-        var TERM_COMMANDS = {
-            help: function () {
-                return '<span class="t-gold">Comandos disponíveis:</span>\n' +
+        // Strings do terminal em PT/EN — T(chave) devolve a versão do idioma atual
+        var TERM_I18N = {
+            welcome: {
+                pt: 'Bem-vindo(a) ao terminal do davidbener.com — digite <span class="t-gold">help</span> para começar.',
+                en: 'Welcome to the davidbener.com terminal — type <span class="t-gold">help</span> to get started.'
+            },
+            help: {
+                pt: '<span class="t-gold">Comandos disponíveis:</span>\n' +
                     '  <span class="t-cmd">whoami</span>      quem é você\n' +
                     '  <span class="t-cmd">david</span>       sobre o David\n' +
                     '  <span class="t-cmd">skills</span>      stack técnica\n' +
                     '  <span class="t-cmd">certs</span>       certificações\n' +
                     '  <span class="t-cmd">contact</span>     canais de contato\n' +
+                    '  <span class="t-cmd">lang</span>        lang en | lang pt\n' +
                     '  <span class="t-cmd">neofetch</span>    info do sistema\n' +
                     '  <span class="t-cmd">ls</span>          listar seções\n' +
                     '  <span class="t-cmd">cd &lt;seção&gt;</span>  navegar até uma seção\n' +
                     '  <span class="t-cmd">matrix</span>      ???\n' +
                     '  <span class="t-cmd">clear</span>       limpar tela\n' +
-                    '  <span class="t-cmd">exit</span>        fechar terminal';
+                    '  <span class="t-cmd">exit</span>        fechar terminal',
+                en: '<span class="t-gold">Available commands:</span>\n' +
+                    '  <span class="t-cmd">whoami</span>      who you are\n' +
+                    '  <span class="t-cmd">david</span>       about David\n' +
+                    '  <span class="t-cmd">skills</span>      tech stack\n' +
+                    '  <span class="t-cmd">certs</span>       certifications\n' +
+                    '  <span class="t-cmd">contact</span>     contact channels\n' +
+                    '  <span class="t-cmd">lang</span>        lang en | lang pt\n' +
+                    '  <span class="t-cmd">neofetch</span>    system info\n' +
+                    '  <span class="t-cmd">ls</span>          list sections\n' +
+                    '  <span class="t-cmd">cd &lt;section&gt;</span> jump to a section\n' +
+                    '  <span class="t-cmd">matrix</span>      ???\n' +
+                    '  <span class="t-cmd">clear</span>       clear the screen\n' +
+                    '  <span class="t-cmd">exit</span>        close the terminal'
             },
-            whoami: function () { return 'visitante — mas seja bem-vindo(a) como se fosse root :)'; },
-            david: function () {
-                return '<span class="t-gold">David Bener</span> — Analista de Infraestrutura de TI\nCloud (AWS · OCI) · DevOps · Automação · Segurança\nCertificado por AWS, Oracle, Google, Cisco e Fortinet.';
+            whoami: {
+                pt: 'visitante — mas seja bem-vindo(a) como se fosse root :)',
+                en: 'guest — but make yourself at home as if you were root :)'
             },
-            skills: function () {
-                return '<span class="t-gold">cloud:</span>     AWS, Oracle Cloud, Linux, Terraform\n<span class="t-gold">devops:</span>    Docker, Python, CI/CD, Automação\n<span class="t-gold">security:</span>  Firewall, Redes, Ethical Hacking, Hardening';
+            david: {
+                pt: '<span class="t-gold">David Bener</span> — Analista de Infraestrutura de TI\nCloud (AWS · OCI) · DevOps · Automação · Segurança\nCertificado por AWS, Oracle, Google, Cisco e Fortinet.',
+                en: '<span class="t-gold">David Bener</span> — IT Infrastructure Analyst\nCloud (AWS · OCI) · DevOps · Automation · Security\nCertified by AWS, Oracle, Google, Cisco and Fortinet.'
             },
+            skills: {
+                pt: '<span class="t-gold">cloud:</span>     AWS, Oracle Cloud, Linux, Terraform\n<span class="t-gold">devops:</span>    Docker, Python, CI/CD, Automação\n<span class="t-gold">security:</span>  Firewall, Redes, Ethical Hacking, Hardening',
+                en: '<span class="t-gold">cloud:</span>     AWS, Oracle Cloud, Linux, Terraform\n<span class="t-gold">devops:</span>    Docker, Python, CI/CD, Automation\n<span class="t-gold">security:</span>  Firewall, Networking, Ethical Hacking, Hardening'
+            },
+            certs: {
+                pt: '10 certificações verificáveis. Redirecionando para #certificacoes...',
+                en: '10 verifiable certifications. Jumping to #certifications...'
+            },
+            neofetchOs: { pt: 'Linux (sempre)', en: 'Linux (always)' },
+            neofetchUptime: { pt: 'disponível para projetos', en: 'available for projects' },
+            emptyHistory: { pt: 'histórico vazio.', en: 'empty history.' },
+            ping: {
+                pt: '--- davidbener.com --- <span class="t-gold">0% packet loss</span> — sempre no ar.',
+                en: '--- davidbener.com --- <span class="t-gold">0% packet loss</span> — always online.'
+            },
+            uptime: {
+                pt: 'up desde sempre · load average: café, cloud, código',
+                en: 'up since forever · load average: coffee, cloud, code'
+            },
+            sudo: {
+                pt: 'visitante não está no arquivo sudoers. Este incidente será reportado.',
+                en: 'guest is not in the sudoers file. This incident will be reported.'
+            },
+            langUsage: {
+                pt: 'uso: <span class="t-cmd">lang en</span> | <span class="t-cmd">lang pt</span>',
+                en: 'usage: <span class="t-cmd">lang en</span> | <span class="t-cmd">lang pt</span>'
+            },
+            cdNotFound: { pt: ': diretório não encontrado', en: ': no such directory' },
+            cdHint: { pt: '(tente: ls)', en: '(try: ls)' },
+            notFound: { pt: ': comando não encontrado.', en: ': command not found.' },
+            typeHelp: {
+                pt: 'Digite <span class="t-cmd">help</span>.',
+                en: 'Type <span class="t-cmd">help</span>.'
+            }
+        };
+
+        function T(key) {
+            var entry = TERM_I18N[key];
+            return entry ? (entry[currentLang] || entry.pt) : key;
+        }
+
+        var TERM_COMMANDS = {
+            help: function () { return T('help'); },
+            whoami: function () { return T('whoami'); },
+            david: function () { return T('david'); },
+            skills: function () { return T('skills'); },
             certs: function () {
                 setTimeout(function () { closeTerm(); document.getElementById('certificacoes').scrollIntoView({ behavior: 'smooth' }); }, 900);
-                return '10 certificações verificáveis. Redirecionando para #certificacoes...';
+                return T('certs');
             },
             contact: function () {
                 return 'email:    <a href="mailto:contato@davidbener.com">contato@davidbener.com</a>\nlinkedin: <a href="https://linkedin.com/in/davidbener" target="_blank" rel="noopener noreferrer">linkedin.com/in/davidbener</a>\ngithub:   <a href="https://github.com/db3n3r" target="_blank" rel="noopener noreferrer">github.com/db3n3r</a>';
@@ -1473,15 +1730,15 @@
             neofetch: function () {
                 return '<span class="t-gold">       ____  ____  </span>   <span class="t-gold">david</span>@<span class="t-gold">bener.com</span>\n' +
                     '<span class="t-gold">      / __ \\/ __ )</span>   -----------------\n' +
-                    '<span class="t-gold">     / / / / __  |</span>   OS:      Linux (sempre)\n' +
+                    '<span class="t-gold">     / / / / __  |</span>   OS:      ' + T('neofetchOs') + '\n' +
                     '<span class="t-gold">    / /_/ / /_/ / </span>   Role:    Infra & Cloud\n' +
                     '<span class="t-gold">   /_____/_____/  </span>   Shell:   bash + terraform\n' +
-                    '                      Uptime:  disponível para projetos';
+                    '                      Uptime:  ' + T('neofetchUptime');
             },
             ls: function () { return 'sobre/  skills/  certificacoes/  contato/'; },
             date: function () { return new Date().toString(); },
             uname: function () { return 'davidbener.com 1.0 x86_64 GNU/Cloud'; },
-            pwd: function () { return '/home/visitante'; },
+            pwd: function () { return currentLang === 'en' ? '/home/guest' : '/home/visitante'; },
             matrix: function () {
                 setTimeout(function () { window.location.href = 'matrix-efect.html'; }, 800);
                 return '<span class="t-gold">Wake up, Neo...</span>';
@@ -1489,12 +1746,12 @@
             history: function () {
                 return termHistory.length
                     ? termHistory.map(function (c, i) { return '  ' + (i + 1) + '  ' + c.replace(/</g, '&lt;'); }).join('\n')
-                    : 'histórico vazio.';
+                    : T('emptyHistory');
             },
             ping: function () {
-                return 'PING davidbener.com (☁️): 64 bytes\n64 bytes: icmp_seq=1 ttl=64 time=0.42 ms\n64 bytes: icmp_seq=2 ttl=64 time=0.38 ms\n--- davidbener.com --- <span class="t-gold">0% packet loss</span> — sempre no ar.';
+                return 'PING davidbener.com (☁️): 64 bytes\n64 bytes: icmp_seq=1 ttl=64 time=0.42 ms\n64 bytes: icmp_seq=2 ttl=64 time=0.38 ms\n' + T('ping');
             },
-            uptime: function () { return 'up desde sempre · load average: café, cloud, código'; },
+            uptime: function () { return T('uptime'); },
             clear: function () { termOutput.innerHTML = ''; return null; },
             exit: function () { closeTerm(); return null; }
         };
@@ -1518,9 +1775,17 @@
             var cmd = parts[0].toLowerCase();
 
             if (cmd === 'sudo') {
-                termPrint('<span class="t-err">visitante não está no arquivo sudoers. Este incidente será reportado.</span>');
+                termPrint('<span class="t-err">' + T('sudo') + '</span>');
             } else if (cmd === 'echo') {
                 termPrint('<span class="t-out">' + parts.slice(1).join(' ').replace(/</g, '&lt;') + '</span>');
+            } else if (cmd === 'lang') {
+                var lg = (parts[1] || '').toLowerCase();
+                if (lg === 'en' || lg === 'pt') {
+                    applyLang(lg);
+                    termPrint('<span class="t-out">' + (lg === 'en' ? 'Language switched to English.' : 'Idioma alterado para português.') + '</span>');
+                } else {
+                    termPrint('<span class="t-out">' + T('langUsage') + '</span>');
+                }
             } else if (cmd === 'cd') {
                 var dest = (parts[1] || '').replace(/\/$/, '');
                 var map = { sobre: 'sobre', skills: 'skills', certificacoes: 'certificacoes', certs: 'certificacoes', contato: 'contato', contact: 'contato' };
@@ -1528,27 +1793,52 @@
                     closeTerm();
                     document.getElementById(map[dest]).scrollIntoView({ behavior: 'smooth' });
                 } else {
-                    termPrint('<span class="t-err">cd: ' + dest.replace(/</g, '&lt;') + ': diretório não encontrado</span> <span class="t-out">(tente: ls)</span>');
+                    termPrint('<span class="t-err">cd: ' + dest.replace(/</g, '&lt;') + T('cdNotFound') + '</span> <span class="t-out">' + T('cdHint') + '</span>');
                 }
             } else if (TERM_COMMANDS[cmd]) {
                 var result = TERM_COMMANDS[cmd]();
                 if (result !== null) termPrint('<span class="t-out">' + result + '</span>');
             } else {
-                termPrint('<span class="t-err">' + cmd.replace(/</g, '&lt;') + ': comando não encontrado.</span> <span class="t-out">Digite <span class="t-cmd">help</span>.</span>');
+                termPrint('<span class="t-err">' + cmd.replace(/</g, '&lt;') + T('notFound') + '</span> <span class="t-out">' + T('typeHelp') + '</span>');
             }
         }
 
+        var termLastFocus = null;
+
         function openTerm() {
+            if (termOverlay.classList.contains('open')) return;
+            termLastFocus = document.activeElement;
             termOverlay.classList.add('open');
+            document.body.classList.add('no-scroll');
             if (!termOutput.childElementCount) {
-                termPrint('<span class="t-out">Bem-vindo(a) ao terminal do davidbener.com — digite <span class="t-gold">help</span> para começar.</span>');
+                termPrint('<span class="t-out">' + T('welcome') + '</span>');
             }
             termInput.focus();
         }
 
         function closeTerm() {
+            if (!termOverlay.classList.contains('open')) return;
             termOverlay.classList.remove('open');
+            document.body.classList.remove('no-scroll');
+            if (termLastFocus && termLastFocus.focus) termLastFocus.focus();
+            termLastFocus = null;
         }
+
+        // Mantém o foco dentro do terminal enquanto ele está aberto
+        termOverlay.addEventListener('keydown', function (e) {
+            if (e.key !== 'Tab' || e.defaultPrevented) return;
+            var focusables = termOverlay.querySelectorAll('button, input, a[href]');
+            if (!focusables.length) return;
+            var first = focusables[0];
+            var last = focusables[focusables.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        });
 
         document.getElementById('heroTerm').addEventListener('click', openTerm);
         document.getElementById('heroTerm').addEventListener('keydown', function (e) {
@@ -1572,7 +1862,7 @@
                 e.preventDefault();
                 var partial = termInput.value.trim().toLowerCase();
                 if (!partial) return;
-                var all = Object.keys(TERM_COMMANDS).concat(['sudo', 'cd', 'echo']);
+                var all = Object.keys(TERM_COMMANDS).concat(['sudo', 'cd', 'echo', 'lang']);
                 var matches = all.filter(function (c) { return c.indexOf(partial) === 0; });
                 if (matches.length === 1) {
                     termInput.value = matches[0] + ' ';
@@ -1608,12 +1898,22 @@
             var mouse = { x: -9999, y: -9999 };
             var running = !document.hidden;
 
+            // Renderiza na densidade real da tela para os pontos não saírem borrados
             function resize() {
-                W = canvas.width = window.innerWidth;
-                H = canvas.height = window.innerHeight;
+                var dpr = Math.min(window.devicePixelRatio || 1, 2);
+                W = window.innerWidth;
+                H = window.innerHeight;
+                canvas.width = Math.round(W * dpr);
+                canvas.height = Math.round(H * dpr);
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
             }
             resize();
-            window.addEventListener('resize', resize);
+
+            var resizeTimer;
+            window.addEventListener('resize', function () {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(resize, 150);
+            });
 
             var COUNT = window.innerWidth < 760 ? 32 : 68;
             for (var i = 0; i < COUNT; i++) {
@@ -1761,9 +2061,169 @@
 
         // ============ Título da aba quando o visitante sai ============
         (function () {
-            var original = document.title;
+            var saved = null;
             document.addEventListener('visibilitychange', function () {
-                document.title = document.hidden ? '⚡ Volte logo! — David Bener' : original;
+                if (document.hidden) {
+                    saved = document.title;
+                    document.title = currentLang === 'en' ? '⚡ Come back soon! — David Bener' : '⚡ Volte logo! — David Bener';
+                } else if (saved) {
+                    document.title = saved;
+                }
+            });
+        })();
+
+        // ============ Idioma PT/EN ============
+        var currentLang = 'pt';
+        try { currentLang = localStorage.getItem('siteLang') === 'en' ? 'en' : 'pt'; } catch (e) { }
+
+        var PT_TITLE = document.title;
+        var EN_TITLE = 'David Bener | IT Infrastructure Analyst — Cloud & DevOps';
+
+        var i18nPairs = (function () {
+            var defs = [
+                ['.skip-link', 'Skip to content'],
+                ['.nav-links a[href="#sobre"]', 'About'],
+                ['.nav-links a[href="#certificacoes"]', 'Certifications'],
+                ['.nav-links a[href="#contato"]', 'Contact me'],
+                ['.hero .role', '<strong>IT Infrastructure Analyst</strong> — Cloud · DevOps · Automation'],
+                ['.hero .tagline', 'I build and run reliable infrastructure on AWS and Oracle Cloud, with Terraform and Python automation, containers and network security.'],
+                ['.hero-actions .btn-gold', '<i class="fas fa-paper-plane" aria-hidden="true"></i> Send me a message'],
+                ['.hero-actions .btn-ghost', '<i class="fas fa-award" aria-hidden="true"></i> Certifications'],
+                ['.term-hint', 'click the terminal or press <kbd>Ctrl</kbd> + <kbd>K</kbd> to interact'],
+                ['#sobre .kicker', '// about me'],
+                ['#sobre h2', 'Infrastructure that just works'],
+                ['.about-text > p:nth-of-type(1)', 'I\'m an IT infrastructure professional focused on <strong>cloud solutions, automation and DevOps</strong>. I have solid experience with AWS and Oracle Cloud, containerization and network security.'],
+                ['.about-text > p:nth-of-type(2)', 'My goal is always the same: <strong>optimize processes and deliver robust solutions</strong> — infrastructure as code, reproducible environments and secure operations, from provisioning to monitoring.'],
+                ['.about-text > p:nth-of-type(3)', 'Certified by AWS, Oracle, Google, Cisco and Fortinet.'],
+                ['.stats-row .stat:nth-child(1) .lbl', 'verifiable certifications'],
+                ['.stats-row .stat:nth-child(2) .lbl', 'big tech issuers'],
+                ['.stats-row .stat:nth-child(3) .lbl', 'uptime as a goal'],
+                ['.pillars .pillar:nth-child(2) h3', 'Automation & IaC'],
+                ['.pillars .pillar:nth-child(1) p', 'Architecture and operations on AWS and Oracle Cloud (OCI).'],
+                ['.pillars .pillar:nth-child(2) p', 'Terraform, Python and pipelines to eliminate manual work.'],
+                ['.pillars .pillar:nth-child(3) h3', 'Security'],
+                ['.pillars .pillar:nth-child(3) p', 'Firewalls, hardening and cybersecurity best practices.'],
+                ['#skills h2', 'Core Skills'],
+                ['.skills-groups .skill-group:nth-child(2) .group-title', 'DevOps & Automation'],
+                ['.skills-groups .skill-group:nth-child(3) .group-title', 'Security'],
+                ['#certificacoes .kicker', '// credentials'],
+                ['#certificacoes h2', 'Certifications'],
+                ['#certificacoes .section-head p', 'All verifiable — click to open the official credential.'],
+                ['#contato .kicker', '// contact'],
+                ['#contato h2', 'Let\'s talk?'],
+                ['#contato .section-head p', 'I reply by email and LinkedIn. Or use the form — your message lands straight in my inbox.'],
+                ['label[for="fieldName"]', 'name'],
+                ['label[for="fieldMessage"]', 'message'],
+                ['.contact-form button[type="submit"]', '<i class="fas fa-paper-plane" aria-hidden="true"></i> Send message']
+            ];
+            return defs.map(function (d) {
+                var el = document.querySelector(d[0]);
+                return el ? { el: el, pt: el.innerHTML, en: d[1] } : null;
+            }).filter(Boolean);
+        })();
+
+        var i18nPlaceholders = (function () {
+            var defs = [
+                ['#fieldName', 'Your name'],
+                ['#fieldEmail', 'you@example.com'],
+                ['#fieldMessage', 'Your message...']
+            ];
+            return defs.map(function (d) {
+                var el = document.querySelector(d[0]);
+                return el ? { el: el, pt: el.placeholder, en: d[1] } : null;
+            }).filter(Boolean);
+        })();
+
+        var i18nChips = (function () {
+            var map = { 'Automação': 'Automation', 'Redes': 'Networking' };
+            var out = [];
+            document.querySelectorAll('.chip').forEach(function (ch) {
+                var node = ch.lastChild;
+                if (node && node.nodeType === 3 && map[node.nodeValue.trim()]) {
+                    out.push({ node: node, pt: node.nodeValue, en: map[node.nodeValue.trim()] });
+                }
+            });
+            return out;
+        })();
+
+        function applyLang(lang) {
+            currentLang = lang;
+            try { localStorage.setItem('siteLang', lang); } catch (e) { }
+            document.documentElement.lang = lang === 'en' ? 'en' : 'pt-BR';
+            document.title = lang === 'en' ? EN_TITLE : PT_TITLE;
+
+            i18nPairs.forEach(function (p) { p.el.innerHTML = lang === 'en' ? p.en : p.pt; });
+            i18nPlaceholders.forEach(function (p) { p.el.placeholder = lang === 'en' ? p.en : p.pt; });
+            i18nChips.forEach(function (c) { c.node.nodeValue = lang === 'en' ? c.en : c.pt; });
+
+            var toggle = document.getElementById('langToggle');
+            toggle.textContent = lang === 'en' ? 'PT' : 'EN';
+            toggle.setAttribute('aria-label', lang === 'en' ? 'Mudar para português' : 'Switch to English');
+
+            document.querySelectorAll('.copy-btn:not(.copied)').forEach(function (btn) {
+                var label = lang === 'en' ? 'Copy email' : 'Copiar email';
+                btn.setAttribute('aria-label', label);
+                btn.setAttribute('title', label);
+            });
+        }
+
+        function toggleLang() {
+            applyLang(currentLang === 'en' ? 'pt' : 'en');
+        }
+
+        if (currentLang === 'en') applyLang('en');
+
+        // ============ Copiar email com um clique ============
+        (function () {
+            document.querySelectorAll('.copy-btn').forEach(function (btn) {
+                var icon = btn.querySelector('i');
+                var resetTimer;
+
+                btn.addEventListener('click', function () {
+                    var value = btn.dataset.copy;
+                    var done = function () {
+                        btn.classList.add('copied');
+                        icon.className = 'fas fa-check';
+                        btn.setAttribute('aria-label', currentLang === 'en' ? 'Email copied' : 'Email copiado');
+                        clearTimeout(resetTimer);
+                        resetTimer = setTimeout(function () {
+                            btn.classList.remove('copied');
+                            icon.className = 'fas fa-copy';
+                            btn.setAttribute('aria-label', currentLang === 'en' ? 'Copy email' : 'Copiar email');
+                        }, 2000);
+                    };
+
+                    // Fallback para http://, iOS antigo e quando a permissão é negada
+                    var legacyCopy = function () {
+                        var tmp = document.createElement('textarea');
+                        tmp.value = value;
+                        tmp.setAttribute('readonly', '');
+                        tmp.style.position = 'fixed';
+                        tmp.style.opacity = '0';
+                        document.body.appendChild(tmp);
+                        tmp.select();
+                        var ok = false;
+                        try { ok = document.execCommand('copy'); } catch (e) { }
+                        document.body.removeChild(tmp);
+                        if (ok) { done(); return; }
+
+                        // Último recurso: seleciona o email na tela para o visitante copiar na mão
+                        var span = btn.parentElement.querySelector('span');
+                        if (span) {
+                            var range = document.createRange();
+                            range.selectNodeContents(span);
+                            var sel = window.getSelection();
+                            sel.removeAllRanges();
+                            sel.addRange(range);
+                        }
+                    };
+
+                    if (navigator.clipboard && window.isSecureContext) {
+                        navigator.clipboard.writeText(value).then(done).catch(legacyCopy);
+                    } else {
+                        legacyCopy();
+                    }
+                });
             });
         })();
     </script>
