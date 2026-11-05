@@ -14,3 +14,6 @@ schtasks /Query /TN "SuaTarefa" /V /FO LIST
 
 Get-ScheduledTask | Select-Object TaskName, TaskPath, State, @{Name="RunAsUser";Expression={$_.Principal.UserId}} | Format-Table -AutoSize
 
+:: ver o que a task faz 
+
+Get-ScheduledTask -TaskName "SR" | Select-Object -ExpandProperty Triggers
